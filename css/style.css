@@ -2,3 +2,8 @@ img {
   height:  50px;
   width:   auto;
 }
+
+img#show {
+  height: 500px;
+  width: auto;
+}

@@ -17,6 +17,10 @@ var winstagrams = [
   ])
   .controller("WinstagramIndexController", [
     WinstagramIndexControllerFunction
+  ])
+  .controller("WinstagramShowController", [
+    "$stateParams",
+    WinstagramShowControllerFunction
   ]);
 
 function WinstagramIndexControllerFunction(){
@@ -24,6 +28,17 @@ console.log('in the Winstragram Controller')
   this.winstagrams=winstagrams
   console.log(this.winstagrams[0].author)
 }
+
+function WinstagramShowControllerFunction($stateParams){
+console.log('in the Winstragram Show Controller')
+  let index=winstagrams[$stateParams.id]
+  console.log("index=",index)
+  this.wininstagram=index;
+  console.log(index.author)
+  console.log(index.body)
+
+}
+
 
 function RouterFunction($stateProvider){
   $stateProvider
@@ -35,6 +50,9 @@ function RouterFunction($stateProvider){
   })
   .state("winstagramShow", {
     url:"/wg/:id",
-    templateUrl: "/js/ng-views/show.html"
-  });
+    templateUrl: "/js/ng-views/show.html",
+    controller:"WinstagramShowController",
+    controllerAs: "vm"
+  })
+
 }
