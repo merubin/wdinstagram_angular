@@ -1,5 +1,5 @@
 <h2>These are all the Instagrams</h2>
-
+<a data-ui-sref="winstagramNew">Create A New Winstagram</a>
 <div data-ng-repeat="wg in vm.winstagrams">
   <p><a data-ui-sref="winstagramShow({id: wg.id})"> {{wg.body}}     {{wg.author}} </a>
       <img ng-src={{wg.photo_url}}> </p>
