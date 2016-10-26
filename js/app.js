@@ -1,32 +1,43 @@
 
-var winstagrams = [
-      {photo_url: "http://m9.i.pbase.com/u46/mrubin/medium/39911299.chinapeanut1.jpg",
-          author: "Mike Rubin",
-            body: "Nice Picture of a cat" },
-            {photo_url: "http://m7.i.pbase.com/u21/mrubin/large/36870637.hokie.jpg",
-                author: "Alex ",
-                  body: "Go Hokies" }]
 
   angular
   .module("winstagram", [
-    "ui.router"
+    "ui.router",
+    "ngResource"
   ])
   .config([
     "$stateProvider",
     RouterFunction
   ])
   .controller("WinstagramIndexController", [
+    "WinstagramFactory",
     WinstagramIndexControllerFunction
   ])
   .controller("WinstagramShowController", [
+  "WinstagramFactory",
     "$stateParams",
     WinstagramShowControllerFunction
-  ]);
+  ])
+  .factory( "WinstagramFactory", [
+      "$resource",
+    WgFactoryFunction
+    ]);
 
-function WinstagramIndexControllerFunction(){
-console.log('in the Winstragram Controller')
-  this.winstagrams=winstagrams
-  console.log(this.winstagrams[0].author)
+
+    function WgFactoryFunction( $resource ){
+      console.log("WgFactoryFunction Working")
+      console.log($resource)
+      return $resource( "http://localhost:3000/entries/:id", {}, {
+        update: { method: "PUT" }
+      });
+    }
+
+
+function WinstagramIndexControllerFunction(WinstagramFactory){
+  console.log('in the Winstragram Controller')
+  this.winstagrams =  WinstagramFactory.query()
+
+
 }
 
 function WinstagramShowControllerFunction($stateParams){
