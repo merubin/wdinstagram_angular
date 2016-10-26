@@ -1,7 +1,6 @@
 <h2>These are all the Instagrams</h2>
 
 <div data-ng-repeat="wg in vm.winstagrams">
-{{$index}}
-  <p><a data-ui-sref="winstagramShow({id:$index})"> {{wg.body}}     {{wg.author}} </a>
+  <p><a data-ui-sref="winstagramShow({id: wg.id})"> {{wg.body}}     {{wg.author}} </a>
       <img ng-src={{wg.photo_url}}> </p>
 </div>

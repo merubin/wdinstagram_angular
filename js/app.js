@@ -36,13 +36,11 @@
 function WinstagramIndexControllerFunction(WinstagramFactory){
   console.log('in the Winstragram Controller')
   this.winstagrams =  WinstagramFactory.query()
-
-
 }
 
-function WinstagramShowControllerFunction($stateParams){
+function WinstagramShowControllerFunction(WinstagramFactory,$stateParams){
 console.log('in the Winstragram Show Controller')
-  let index=winstagrams[$stateParams.id]
+  let index=WinstagramFactory.get({id: $stateParams.id})
   console.log("index=",index)
   this.wininstagram=index;
   console.log(index.author)
