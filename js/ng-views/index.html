@@ -3,4 +3,5 @@
 <div data-ng-repeat="wg in vm.winstagrams">
   <p><a data-ui-sref="winstagramShow({id: wg.id})"> {{wg.body}}     {{wg.author}} </a>
       <img ng-src={{wg.photo_url}}> </p>
+  <a data-ui-sref="winstagramEdit({id: gram.id})">Edit Winstagram</a>
 </div>

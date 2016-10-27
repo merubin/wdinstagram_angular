@@ -23,6 +23,11 @@
     "$stateParams",
     WinstagramNewControllerFunction
   ])
+  .controller("WinstagramEditController" ,[
+    "WinstagramFactory",
+    "$stateParams",
+    WinstagramEditControllerFunction
+  ])
   .factory( "WinstagramFactory", [
       "$resource",
     WgFactoryFunction
@@ -52,6 +57,21 @@ console.log('in the Winstragram Show Controller')
   console.log(index.body)
 
 }
+
+function WinstagramEditControllerFunction(WinstagramFactory,$stateParams){
+  this.winstagram = WinstagramFactory.get({id:$stateParams.id})
+  this.update = function(){
+    this.winstagram.$update({id: $stateParams.params.id}).then(function(winstagram){
+      $stateParams.go("instaShow",{id: winstagram .id})
+    })
+  }
+  this.destroy = function(){
+    this.winstagram.$delete({id: $stateParams.id}).then(function(winstagram){
+    $stateParams.go("instaIndex")
+    })
+  }
+}
+
 function WinstagramNewControllerFunction(WinstagramFactory,$stateParams){
   this.wininstagram= new WinstagramFactory()
   this.create=function(){
@@ -79,6 +99,13 @@ function RouterFunction($stateProvider){
     controller:"WinstagramNewController",
     controllerAs: "vm"
   })
+  .state("winstagramEdit",{
+    url: "/wg/:id/edit",
+    templateUrl: "js/ng-views/edit.html",
+    controller: "WinstagramEditController",
+    controllerAs: "vm"
+  })
+
 
   .state("winstagramShow", {
     url:"/wg/:id",
